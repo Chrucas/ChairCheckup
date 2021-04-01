@@ -65,9 +65,9 @@ src="https://www.gstatic.com/charts/loader.js"></script>
 
 <script type="text/javascript">
 	google.charts.load('current', {'packages':['corechart']});
-	google.charts.setOnLoadCallback(drawPieChart);
+	google.charts.setOnLoadCallback(drawChart);
 	
-	function drawPieChart() {
+	function drawChart() {
 
 		var timeDataRef = database.ref("Data/OccupationTime").orderByKey();
 		timeDataRef.once("value")
@@ -90,7 +90,7 @@ src="https://www.gstatic.com/charts/loader.js"></script>
 		});
 
 		var data = google.visualization.arrayToDataTable([
-			['Time seated in minutes', 'Ammount of times'],
+			['Time seated in minutes', 'Ammount of times measured'],
 			['less than 10 minutes', array10.length],
 			['less than 25 minutes', array25.length],
 			['less than 50 minutes', array50.length],
@@ -98,9 +98,9 @@ src="https://www.gstatic.com/charts/loader.js"></script>
 			['greater than 100 minutes', array400.length]
 			]);
 		
-		var options = {'title':'My Average Seating time',  'width':550,'height':400,is3D: true};
+		var options = {'title':'My Average Seating time',  'width':600,'height':400,is3D: true};
 		
-		var chart = new google.visualization.PieChart(document.getElementById('chart'));
+		var chart = new google.visualization.ColumnChart(document.getElementById('chart'));
 		chart.draw(data, options);
 
 		array10 = [];
@@ -112,7 +112,7 @@ src="https://www.gstatic.com/charts/loader.js"></script>
 
 </script>
 <div align="center">
-	<button type="button"  onclick="drawPieChart()">Refresh</button>
+	<button type="button"  onclick="drawChart()">Refresh</button>
 </div>
 </body>
 </html>
